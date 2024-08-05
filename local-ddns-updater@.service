@@ -1,0 +1,11 @@
+[Unit]
+Description=Local DDNS Updater on %I
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=exec
+ExecStart=/usr/bin/local-ddns-updater --interface %i -v
+
+[Install]
+WantedBy=sysinit.target

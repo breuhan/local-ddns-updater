@@ -1,0 +1,33 @@
+[package]
+name = "local-ddns-updater"
+version = "0.2.1"
+edition = "2021"
+maintainer = "Andy Breuhan <andy@breuhan.de>"
+copyright = "2024, Andy Breuhan <andy@breuhan.de>"
+description = "local-ddns-updater is a tool that allows users to update their local DNS records"
+license-file = "LICENSE"
+homepage = "https://github.com/breuhan/local-ddns-updater"
+
+[dependencies]
+clap = { version = "4.4.11", features = ["derive", "cargo"] }
+tokio = { version = "1.35", features = ["full"] }
+netlink-sys = { version = "*" }
+netlink-packet-core = { version = "*" }
+netlink-packet-route = { version = "*" }
+rtnetlink = { version = "*" }
+futures = "0.3.11"
+
+[package.metadata.deb]
+maintainer = "Andy Breuhan <andy@breuhan.de>"
+copyright = "2024, Andy Breuhan <andy@breuhan.de>"
+extended-description = """\
+A simple subcommand for the Cargo package manager for \
+building Debian packages from Rust projects."""
+depends = "$auto"
+section = "utility"
+priority = "optional"
+assets = [
+  ["target/release/local-ddns-updater", "usr/bin/", "755"],
+  ["local-ddns-updater@.service", "etc/systemd/system/", "644"],
+  ["local-ddns-updater/.keep", "etc/local-ddns-updater/", "644"],
+]
